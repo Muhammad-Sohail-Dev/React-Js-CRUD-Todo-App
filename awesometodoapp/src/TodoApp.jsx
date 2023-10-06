@@ -16,7 +16,7 @@ const TodoApp = () => {
     fontWeight: "bold",
     textDecoration: "underline",
   });
-  
+
 
   // Handling changes in the input field
   const handleChange = (e) => {
@@ -72,7 +72,7 @@ const TodoApp = () => {
     <>
       <div className="todo_container">
         <div className="todo_heading">
-          <h1>React Js CRUD Todo List App</h1>
+          <h1>React Js CRUD Todo App</h1>
         </div>
         <div className="todo_search">
           <form>
