@@ -16,6 +16,7 @@ const TodoApp = () => {
     fontWeight: "bold",
     textDecoration: "underline",
   });
+  
 
   // Handling changes in the input field
   const handleChange = (e) => {
