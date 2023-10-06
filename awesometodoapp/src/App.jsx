@@ -1,9 +1,9 @@
-import TodoList2 from './TodoApp'
+import TodoApp from './TodoApp'
 
 const App = () => {
   return (
    <>
-    <TodoList2/>
+    <TodoApp/>
    </>
   )
 }

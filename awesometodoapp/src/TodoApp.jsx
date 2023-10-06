@@ -1,59 +1,72 @@
-import  { useState,useRef } from 'react';
+// Importing necessary hooks and styles
+import  { useState, useRef } from 'react';
 import './todoapp.css';
 
-const TodoList2 = () => {
-const ref = useRef(null)
-const [todo , setTodo] = useState([]);
-const [input , setInput] = useState('');
-const [editId , setEditId] = useState(null);
-const [deleteConfirmationId, setDeleteConfirmationId] = useState(null);
-const [deleteColor , setDeleteColor] = useState({
-  color : 'red',
-  fontweight : 'bold',
-  textdecoration : 'underline'
-});
-const handleChange = (e) => {
-  setInput(e.target.value);
-}
-const handleSubmit = (e) => {
-  e.preventDefault()
-  if(input.trim() !== '' && editId !== null){
-    const updateuser = todo.map((user) => {
-      return user.id === editId ? {...user , input} : user
-    });
-    setTodo(updateuser)
-    setEditId(null)
-    setInput('')
-  }else if(input.trim() === ''){
-    alert('input feild is empty')
+const TodoApp = () => {
+  // Creating references and initializing state variables
+  const ref = useRef(null);
+  const [todo , setTodo] = useState([]);
+  const [input , setInput] = useState('');
+  const [editId , setEditId] = useState(null);
+  const [deleteConfirmationId, setDeleteConfirmationId] = useState(null);
+  
+  // Setting initial styles for delete confirmation
+  const [deleteColor , setDeleteColor] = useState({
+    color : 'red',
+    fontWeight : 'bold',
+    textDecoration : 'underline'
+  });
+  
+  // Handling changes in the input field
+  const handleChange = (e) => {
+    setInput(e.target.value);
   }
-  else{
-    const addUser = {id : todo.length + 1 , input}
-    setTodo([...todo , addUser]);
-    setInput('');
-  }
-}
 
-const deleteUser = (id) => {
-  if(deleteConfirmationId === id){
-    const deleteuser = todo.filter((user) => user.id !== id);
-    setTodo(deleteuser);
-    setInput('')
-    setEditId(null)
-    setDeleteConfirmationId(null)
-  }else{
-    setDeleteConfirmationId(id)
-    setDeleteColor(deleteColor)
+  // Handling the form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(input.trim() !== '' && editId !== null){
+      // Updating user information
+      const updateuser = todo.map((user) => {
+        return user.id === editId ? {...user , input} : user;
+      });
+      setTodo(updateuser);
+      setEditId(null);
+      setInput('');
+    } else if(input.trim() === ''){
+      alert('Input field is empty');
+    } else {
+      // Adding a new user
+      const addUser = {id : todo.length + 1 , input};
+      setTodo([...todo , addUser]);
+      setInput('');
+    }
   }
- 
-}
 
-const editUser = (user) => {
-  setInput(user.input);
-  setEditId(user.id)
-  setDeleteConfirmationId(null)
-  ref.current.focus();
-}
+  // Deleting a user or confirming deletion
+  const deleteUser = (id) => {
+    if(deleteConfirmationId === id){
+      // Deleting a user
+      const deleteuser = todo.filter((user) => user.id !== id);
+      setTodo(deleteuser);
+      setInput('');
+      setEditId(null);
+      setDeleteConfirmationId(null);
+    } else {
+      // Confirming deletion
+      setDeleteConfirmationId(id);
+      setDeleteColor(deleteColor);
+    }
+  }
+
+  // Editing a user's information
+  const editUser = (user) => {
+    setInput(user.input);
+    setEditId(user.id);
+    setDeleteConfirmationId(null);
+    ref.current.focus();
+  }
+
   return (
     <>
     <div className="todo_container">
@@ -61,46 +74,51 @@ const editUser = (user) => {
         <h1>React Js CRUD Todo List App</h1>
       </div>
       <div className="todo_search">
-     <form>
-     <input type="text" placeholder='Add User...' value={input} onChange={handleChange} ref={ref}/>
-      <button onClick={handleSubmit}>{editId !== null ? 'UpdateUser' : 'AddUser'}</button>
-     </form>
+        <form>
+          {/* Input field for adding or updating user */}
+          <input type="text" placeholder='Add User...' value={input} onChange={handleChange} ref={ref}/>
+          <button onClick={handleSubmit}>{editId !== null ? 'Update User' : 'Add User'}</button>
+        </form>
       </div>
       <div className="todo_results">
-      <div className="users">
-        <h2>users</h2>
-        <p>actions</p>
-      </div>
-      {todo.map((user) => {
-        return(
-          <div className="user" key={user.id}>
-            <ul>
-            {deleteConfirmationId === user.id ? (
-              <>
-                <li style={{color: deleteColor.color , fontWeight : deleteColor.fontweight, textDecoration : deleteColor.textdecoration}}>{user.input}</li>
-               <div className="todo_buttons">
-               <button onClick={() => deleteUser(user.id)}>are you Sure?</button>
-                <button onClick={() => setDeleteConfirmationId(null)}>No</button>
-               </div>
-              </>
-            ) : (
-              <>
-              <li>{user.input}</li>
-              <div className="todo_buttons">
-              <button onClick={() => deleteUser(user.id)}>DeleteUser</button>
-              <button onClick={() => editUser(user)}>EditUser</button>
-                  </div>
+        <div className="users">
+          <h2>Users</h2>
+          <p>Actions</p>
+        </div>
+        {/* Mapping over the list of users */}
+        {todo.map((user) => {
+          return(
+            <div className="user" key={user.id}>
+              <ul>
+                {deleteConfirmationId === user.id ? (
+                  <>
+                    {/* User name with delete confirmation */}
+                    <li style={{color: deleteColor.color , fontWeight : deleteColor.fontWeight, textDecoration : deleteColor.textDecoration}}>{user.input}</li>
+                    <div className="todo_buttons">
+                      {/* Confirming delete or cancel */}
+                      <button onClick={() => deleteUser(user.id)}>Are you Sure?</button>
+                      <button onClick={() => setDeleteConfirmationId(null)}>No</button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {/* User name with delete and edit buttons */}
+                    <li>{user.input}</li>
+                    <div className="todo_buttons">
+                      <button onClick={() => deleteUser(user.id)}>Delete User</button>
+                      <button onClick={() => editUser(user)}>Edit User</button>
+                    </div>
                   </>             
-            )
-             }
-            </ul>
-          </div>
-        )
-      })}
+                )
+               }
+              </ul>
+            </div>
+          )
+        })}
       </div>
     </div>
     </>
   )
 }
 
-export default TodoList2
+export default TodoApp;
