@@ -1,0 +1,162 @@
+*{margin: 0; padding: 0; box-sizing: border-box;}
+div.todo_container{
+    width: 90%;
+    height: auto;
+    margin: 50px auto 0px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+div.todo_search{
+    width: 100%;
+}
+div.todo_search form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+div.todo_search input{
+    width: 100%;
+    margin: auto;
+    height: 45px;
+    padding: 6px 10px;
+    background: black;
+    outline: none;
+    border: none;
+    color: white;
+    text-transform: capitalize;
+}
+div.todo_search button{
+    width: 100px;
+    height: 45px;
+    background: green;
+    outline: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+div.todo_results{
+    width: 100%;
+}
+div.users{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+div.users h2{
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+}
+div.users p{
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+}
+div.user{
+    width: 100%;
+    height: auto;
+    border: 1px solid;
+    margin: 20px 0px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px;
+    padding: 20px;
+    
+}
+div.todo_results div.user ul{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px auto;
+    list-style: none;
+}
+div.todo_results div.user ul li{
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    word-break: break-word; /* Add this line to enable text wrapping */
+    width: 50%;
+}
+div.todo_results div.todo_buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+div.todo_results div.todo_buttons button:nth-child(1){
+    background: red;
+}
+div.todo_results div.todo_buttons button:nth-child(2){
+    background: green;
+}
+div.todo_results div.todo_buttons button{
+    padding: 10px 20px;
+    text-transform: capitalize;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 6px;
+}
+@media screen and (min-width:1300px) {
+    div.todo_search{
+        width: 100%;
+        border: 1px solid red;
+    }
+    div.todo_search form{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+    }
+    div.todo_search form input{
+        width: 100%;
+    }  
+}
+
+@media screen and (width <= 600px) {
+    div.todo_heading h1{
+        font-size: 1.7rem;
+        text-align: center;
+    }
+    div.todo_results{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+    div.user{
+        border: 2px solid black;
+        width: 100%;
+        height: auto;
+        margin: 10px 0px;
+        border-radius: 10px;
+        box-shadow: 5px 5px 5px black;
+    
+    }
+    div.user ul li {
+        display: flex;
+        font-size: 1.3rem !important;
+        width: 100% !important;
+        justify-content: center;
+        align-items: center;
+        word-break: break-word; /* Add this line to enable text wrapping */
+      }
+      
+    div.todo_buttons{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    div.todo_results div.todo_buttons button{
+        padding: 8px 15px;
+    }
+}
